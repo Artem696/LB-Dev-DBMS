@@ -1,1 +1,1 @@
-Lab_1 - in the progress
+Lab 1 - in progress
