@@ -1,1 +1,1 @@
-# LB-Dev-DBMS
+Lab_1 - in the progress
