@@ -11,12 +11,58 @@ class Lexer:
         self.input = input
         self.output = []
     def lexer(self):
-        pass
+        for s in self.input:
+            if self.current_state == State.s0:
+                if s.isdigit() == True:
+                    self.current_state = State.error
+                    continue
+                elif s == ' ' or s == '\n':
+                    self.current_state = State.s0
+                    continue
+                elif s.isalpha() == True:
+                    self.current_state = State.nxtlit
+                    self.output.append(s)
+                    continue
+                else:
+                    self.current_state = State.error
+                    continue
+            elif self.current_state == State.nxtlit:
+                if s.isdigit() == True:
+                    self.current_state = State.nxtlit
+                    self.output.append(s)
+                    continue
+                elif s == ' ' or s == '\n':
+                    self.current_state = State.s0
+                    print('Token: '+''.join(self.output))
+                    self.output.clear()
+                    continue
+                elif s.isalpha() == True:
+                    self.current_state = State.nxtlit
+                    self.output.append(s)
+                    continue
+                else:
+                    self.current_state = State.error
+                    continue
+            elif self.current_state == State.error:
+                print('Error: invalid character')
+                if len(self.output) > 0: 
+                    print('Token: '+''.join(self.output))
+                self.output.clear()
+                self.current_state = State.s0
+                continue
+        print('Token: '+''.join(self.output))
+        self.output.clear()
+        self.current_state = State.stop
+        print('Successfully')
+
 
 if __name__ == '__main__':
     input_symbols = []
     with open("Lab_1\\LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
         for i in f.read():
             input_symbols.append(i)
-    lex = Lexer(input_symbols)
-    lex.lexer()
+    if len(input_symbols) > 0:
+        lex = Lexer(input_symbols)
+        lex.lexer()
+    else:
+        print('File is empty')
