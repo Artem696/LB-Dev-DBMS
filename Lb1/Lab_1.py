@@ -57,6 +57,7 @@ class Lexer:
 
 
 if __name__ == '__main__':
+    
     input_symbols = []
     with open("Lab_1\\LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
         for i in f.read():
