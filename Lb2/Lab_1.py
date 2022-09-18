@@ -1,5 +1,4 @@
-
-
+import numpy as np
 
 def SimpleSelectionSort(mass):
     for i in range(len(mass)):
@@ -17,5 +16,6 @@ def SimpleSelectionSort(mass):
 
 
 if __name__ == '__main__':
-    mass = [5,10,2,8,11,0,12,17,22,28]
+    mass = np.random.randint(0,100,20)
+    print(mass)
     SimpleSelectionSort(mass)
