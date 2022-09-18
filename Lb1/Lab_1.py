@@ -1,4 +1,5 @@
 from enum import Enum
+import re
 
 class State(Enum):
     s0 = 'S0'
@@ -10,44 +11,55 @@ class Lexer:
         self.current_state = State.s0
         self.input = input
         self.output = []
+    def S0(self,s):
+        if s.isdigit() == True:
+            self.current_state = State.error
+            exit
+        elif s == ' ' or s == '\n':
+            self.current_state = State.s0
+            exit
+        elif s.isalpha() == True:
+            self.current_state = State.nxtlit
+            self.output.append(s)
+            exit
+        else:
+            self.current_state = State.error
+            exit
+    def NXTLIT(self,s):
+        if s.isdigit() == True:
+            self.current_state = State.nxtlit
+            self.output.append(s)
+            exit
+        elif s == ' ' or s == '\n':
+            self.current_state = State.s0
+            print('Token: '+''.join(self.output))
+            self.output.clear()
+            exit
+        elif s.isalpha() == True:
+            self.current_state = State.nxtlit
+            self.output.append(s)
+            exit
+        else:
+            self.current_state = State.error
+            exit
+    def ERROR(self):
+        print('Error: invalid character')
+        self.output.clear()
+        self.current_state = State.s0
+        exit
+
     def lexer(self):
         for s in self.input:
-            if self.current_state == State.s0:
-                if s.isdigit() == True:
-                    self.current_state = State.error
+            match self.current_state:
+                case State.s0:
+                    self.S0(s)
                     continue
-                elif s == ' ' or s == '\n':
-                    self.current_state = State.s0
+                case State.nxtlit:
+                    self.NXTLIT(s)
                     continue
-                elif s.isalpha() == True:
-                    self.current_state = State.nxtlit
-                    self.output.append(s)
+                case State.error:
+                    self.ERROR(s)
                     continue
-                else:
-                    self.current_state = State.error
-                    continue
-            elif self.current_state == State.nxtlit:
-                if s.isdigit() == True:
-                    self.current_state = State.nxtlit
-                    self.output.append(s)
-                    continue
-                elif s == ' ' or s == '\n':
-                    self.current_state = State.s0
-                    print('Token: '+''.join(self.output))
-                    self.output.clear()
-                    continue
-                elif s.isalpha() == True:
-                    self.current_state = State.nxtlit
-                    self.output.append(s)
-                    continue
-                else:
-                    self.current_state = State.error
-                    continue
-            elif self.current_state == State.error:
-                print('Error: invalid character')
-                self.output.clear()
-                self.current_state = State.s0
-                continue
         print('Token: '+''.join(self.output))
         self.output.clear()
         self.current_state = State.stop
@@ -56,7 +68,7 @@ class Lexer:
 
 if __name__ == '__main__':
     input_symbols = []
-    with open("Lab_1\\LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
+    with open("LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
         for i in f.read():
             input_symbols.append(i)
     if len(input_symbols) > 0:
