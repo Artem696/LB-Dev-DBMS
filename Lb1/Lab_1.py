@@ -18,7 +18,7 @@ class Lexer:
         elif s == ' ' or s == '\n':
             self.current_state = State.s0
             exit
-        elif s.isalpha() == True or re.fullmatch(r'^[А-Яа-яЁёa-zA-Z]+$') == True:
+        elif re.search(r'[А-Яа-яЁёa-zA-Z]',s):
             self.current_state = State.nxtlit
             self.output.append(s)
             exit
@@ -35,7 +35,7 @@ class Lexer:
             print('Token: '+''.join(self.output))
             self.output.clear()
             exit
-        elif s.isalpha() == True or re.fullmatch(r'^[А-Яа-яЁёa-zA-Z]+$') == True:
+        elif re.search(r'[А-Яа-яЁёa-zA-Z]',s):
             self.current_state = State.nxtlit
             self.output.append(s)
             exit
