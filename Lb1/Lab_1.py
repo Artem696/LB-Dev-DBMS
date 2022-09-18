@@ -45,8 +45,6 @@ class Lexer:
                     continue
             elif self.current_state == State.error:
                 print('Error: invalid character')
-                if len(self.output) > 0: 
-                    print('Token: '+''.join(self.output))
                 self.output.clear()
                 self.current_state = State.s0
                 continue
@@ -57,7 +55,6 @@ class Lexer:
 
 
 if __name__ == '__main__':
-    
     input_symbols = []
     with open("Lab_1\\LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
         for i in f.read():
