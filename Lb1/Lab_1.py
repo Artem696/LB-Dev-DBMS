@@ -18,7 +18,7 @@ class Lexer:
         elif s == ' ' or s == '\n':
             self.current_state = State.s0
             exit
-        elif s.isalpha() == True:
+        elif s.isalpha() == True or re.fullmatch(r'^[А-Яа-яЁёa-zA-Z]+$') == True:
             self.current_state = State.nxtlit
             self.output.append(s)
             exit
@@ -35,7 +35,7 @@ class Lexer:
             print('Token: '+''.join(self.output))
             self.output.clear()
             exit
-        elif s.isalpha() == True:
+        elif s.isalpha() == True or re.fullmatch(r'^[А-Яа-яЁёa-zA-Z]+$') == True:
             self.current_state = State.nxtlit
             self.output.append(s)
             exit
@@ -58,7 +58,7 @@ class Lexer:
                     self.NXTLIT(s)
                     continue
                 case State.error:
-                    self.ERROR(s)
+                    self.ERROR()
                     continue
         print('Token: '+''.join(self.output))
         self.output.clear()
@@ -68,7 +68,7 @@ class Lexer:
 
 if __name__ == '__main__':
     input_symbols = []
-    with open("LB_IIPS\\Lb1\\lab_1.txt",'r') as f:
+    with open("LB_IIPS\\Lb1\\lab_1.txt",'r',encoding = 'utf-8') as f:
         for i in f.read():
             input_symbols.append(i)
     if len(input_symbols) > 0:
