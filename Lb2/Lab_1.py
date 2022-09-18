@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def SimpleSelectionSort(mass):
     for i in range(len(mass)):
@@ -11,9 +12,6 @@ def SimpleSelectionSort(mass):
         mass[ixmin] = mass[i]
         mass[i] = min
     print(mass)
-
-
-
 
 if __name__ == '__main__':
     mass = np.random.randint(0,100,20)
