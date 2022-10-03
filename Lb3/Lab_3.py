@@ -23,6 +23,14 @@ class DoubleLinkedList:
         else:
             new_node.prev = self.end
             self.end = new_node
+    def remove_first(self):
+        if self.head is None:
+            print("Error: List is empty")
+    def remove_end(self):
+        if self.head is None:
+            print("Error: List is empty")
+    def find_node(self,node):
+        pass
 if __name__ == '__main__':
     my_list = DoubleLinkedList()
     my_list.add_to_end(Node(1))
