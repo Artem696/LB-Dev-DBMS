@@ -1,7 +1,4 @@
 
-from tkinter.messagebox import NO
-
-
 class Node:
     def __init__ (self,value):
         self.value = value
@@ -93,5 +90,5 @@ if __name__ == '__main__':
     my_list.add_to_end(Node(3))
     print(my_list.find_node(5))
     my_list.list_print()
-    my_list.remove_by_key(3)
+    my_list.remove_by_key(2)
     my_list.list_print()
