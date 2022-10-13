@@ -48,12 +48,11 @@ class BinatyTreeNode:
             else:
                 print("Value not found")
     def find_min(self,elem):
-        current = elem
+        current = elem.right
         while True:
             if current.left == None:
                 return current
             current = current.left
-
     def delete(self,value):
         elem = self.find(value)
         if elem is None:
@@ -68,13 +67,34 @@ class BinatyTreeNode:
         # Есть левый или правый потомок
         elif elem.left is None or elem.right is None:
             if elem.left is not None:
-                elem = elem.left
+                if elem.parent.left.value == value:
+                    elem.parent.left = elem.left
+                elif elem.parent.right.value == value:
+                    elem.parent.right = elem.left
             elif elem.right is not None:
-                elem = elem.right
+                if elem.parent.left.value == value:
+                    elem.parent.left = elem.right
+                elif elem.parent.right.value == value:
+                    elem.parent.right = elem.right
         # Есть и оба потомка 
         elif elem.left is not None and elem.right is not None:
-            pass
-        minn = self.find_min(elem)
+            minn = self.find_min(elem)
+            if elem.parent is None:
+                self.value = minn.value
+            elif elem.parent.left == elem:
+                elem.parent.left.value = minn.value
+            elif elem.parent.right == elem:
+                elem.parent.right.value = minn.value
+            if minn.left is None and minn.right is None:
+                if minn.parent.left == minn:
+                    minn.parent.left = None
+                elif minn.parent.right == minn:
+                    minn.parent.right = None
+            else:
+                minn.value = minn.right.value
+                minn.right = None
+                    
+            #print(123456)
     def print(self,elem=None):
         current = self
         if elem is not None:
@@ -85,19 +105,14 @@ class BinatyTreeNode:
         if self.right:
             self.right.print(current.right)
 
-
 tree = BinatyTreeNode()
-tree.insert(5)
+tree.insert(7)
 tree.insert(17)
-tree.insert(11)
+tree.insert(18)
+#tree.insert(15)
 tree.insert(4)
 tree.insert(3)
 tree.insert(6)
-tree.delete(6)
 tree.print()
-# tree.delete(4)
-# print(tree.value)
-# print(tree.left.value)
-# print(tree.right.value)
-# print(tree.left.left.value)
-# print(tree.left.right.value)
+tree.delete(7)
+tree.print()
