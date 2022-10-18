@@ -1,4 +1,3 @@
-from hashlib import new
 
 
 class BinatyTreeNode:
@@ -94,7 +93,6 @@ class BinatyTreeNode:
                 minn.value = minn.right.value
                 minn.right = None
                     
-            #print(123456)
     def print(self,elem=None):
         current = self
         if elem is not None:
@@ -104,15 +102,15 @@ class BinatyTreeNode:
             self.left.print(current.left)
         if self.right:
             self.right.print(current.right)
-
-tree = BinatyTreeNode()
-tree.insert(7)
-tree.insert(17)
-tree.insert(18)
-#tree.insert(15)
-tree.insert(4)
-tree.insert(3)
-tree.insert(6)
-tree.print()
-tree.delete(4)
-tree.print()
+if __name__ == '__main__':
+    tree = BinatyTreeNode()
+    tree.insert(7)
+    tree.insert(17)
+    tree.insert(18)
+    #tree.insert(15)
+    tree.insert(4)
+    tree.insert(3)
+    tree.insert(6)
+    tree.print()
+    tree.delete(7)
+    tree.print()
