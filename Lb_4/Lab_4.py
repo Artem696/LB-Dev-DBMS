@@ -59,9 +59,9 @@ class BinatyTreeNode:
             return
         # Нет потомков
         if elem.left is None and elem.right is None:
-            if elem.parent.left.value == value:
+            if elem.parent.left is not None and elem.parent.left.value == value:
                 elem.parent.left = None
-            elif elem.parent.right.value == value:
+            elif elem.parent.right is not None and elem.parent.right.value == value:
                 elem.parent.right = None
         # Есть левый или правый потомок
         elif elem.left is None or elem.right is None:
@@ -112,5 +112,5 @@ if __name__ == '__main__':
     tree.insert(3)
     tree.insert(6)
     tree.print()
-    tree.delete(7)
+    tree.delete(4)
     tree.print()
