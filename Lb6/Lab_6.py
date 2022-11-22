@@ -11,7 +11,8 @@ class HashTable:
         res = 0
         if isinstance(key, str):
             for i in key:
-                s += ord(i)**2
+                #s += ord(i)**2
+                s += round(len(self.hashTable)*((ord(i)*((5**(1/2)-1)/2)) % 1))
             res = s % len(self.hashTable)
             return res
         res = key % len(self.hashTable)
